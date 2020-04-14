@@ -1,0 +1,30 @@
+h1 { 
+    font-family:arial;
+    font-size:95px;
+    font-style:italic;
+    color:#31ecaf
+}
+
+h3 {
+    font-family: 'Verdana', Geneva, sans-serif;
+    px;
+    color: white;
+}
+
+h2 {
+    font-family: 'Verdana', Geneva, sans-serif;
+    font-size:22
+    px;
+    color: white;
+} 
+
+p {
+    font-family: 'Verdana', Geneva, sans-serif;
+    font-size:14px;
+    color: white;
+}
+
+
+/* Style classes */
+
+.tab { margin-left: 40px; }

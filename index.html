@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+    <body bgcolor = #628378>
+        <h1> 
+          <img src="https://upload.wikimedia.org/wikipedia/en/4/4b/UC_San_Diego_Athletics_Logo.png" width="126" height="112"> </img>
+            Major Map Initiative 
+            <img src="https://upload.wikimedia.org/wikipedia/en/4/4b/UC_San_Diego_Athletics_Logo.png" width="126" height="112"> </img>
+        </h1>
+
+
+      <h2>This website is under construction.</h2>
+    
+    <p>
+      If you'd like to contact us, please send us an email: <a href = "mailto: majormap@ucsd.edu" target="_blank">majormap@ucsd.edu</a>.
+    </p>
+    <p>Join us on Slack <a>here</a>.</p>
+    <p>We are looking for members to help us with this endeavor!</p>
+    
+    <h2>A Brief Mission Statement</h2>
+    <h3>Why are we doing this?</h3>
+    <p>
+      -  Selecting a major is a much more complex task than it seems to be, and being able to see how everything ties in at once is valuable.  
+      This would be especially useful for incoming students (high schoolers) trying to decide on a major, or undeclared majors.
+    </p>
+    <p>
+      -  Students in a major often have “tunnel vision” and take college one quarter at a time, not realizing why they have to take specific 
+      classes and how it ties into the big picture. Knowing the “map” ahead of time can help them make the right decisions.
+    </p>
+    <p>Thus we want to improve upon what the school has to offer regarding such resources.</p>
+
+    <h3>What does our app want to accomplish?</h3>
+    <p>- Display a variety of “maps”: One for major, one for GE’s, Lower and Upper div… there can be many different combinations</p>
+      <p class='tab'>- probably would first enter college + major like 4 year plan.</p>
+      <p class='tab'>- Selecting one major (including specialization) should show a huge road map with many different paths.</p>
+      <p class='tab'>- End nodes will typically be higher division classes.</p>
+      <p class="tab">- Maps will come with an accompanying resources section (youtube videos etc).</p>
+    <p>- Display individual course series maps:</p>
+      <p class="tab">- Select/type in a course and it outputs a map in the form of a <a href ='https://en.wikipedia.org/wiki/Directed_acyclic_graph' target="_blank">directed acyclic graph</a>.</p>
+      <p class="tab">- Because upper division courses are often complex subjects, this road map should help student understand <b>WHY</b> they need to take certain prerequisites.</p>
+      <p class="tab">- Should have a feature where hovering over a class in the map explains why this topic is relevant for the end node class.</p>
+    
+    <h2>Current state of affairs (as of 3/15/20)</h2>
+    <p>
+      - We are currently developing an algorithm in Python to output a map based on a course or department. 
+      Our next step is to export the maps into a json to be visualized in D3, a javascript library.
+    </p>
+    <p>- We need help designing the website, and adding a ton of other functionality and resources!!</p>
+
+    
+    
+    
+    </body>
+
+
+    <style>
+
+        .node {
+          stroke: #fff;
+          stroke-width: 1.5px;
+        }
+        
+        .link {
+          stroke: #999;
+          stroke-opacity: .6;
+        }
+        
+        </style>
+        <body>
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+        <script src = graph.js></script>
+</html>
