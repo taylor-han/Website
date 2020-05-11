@@ -1,169 +1,200 @@
 <!DOCTYPE html>
-	<head>
-		<meta charset="utf-8">
-		<title>Major Map D3 Graph</title>
-        <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    </head>
+
+<head>
+    <meta charset="utf-8">
+    <title>Major Map D3 Graph</title>
+    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     
-	<body>
-		<script type="text/javascript">
-            "use strict";
-            
-            function gen_graph(course, prereqs) {
-                    // returns a graph of the following json format 
-                    // {"nodes": [ { "course": "course name" }, ...], "edges": [ { "source": "course1", "target": "course2", "group" : n}, ] }
-                    // where group assigns a color. If a course is a singular prereq, assign n = 0 (shows as a black edge in D3).
-                    graph = {};
-                    
-                    return graph;
+</head>
+
+<body>
+    <script type="text/javascript">
+        "use strict";
+
+        function gen_graph(course, prereqs) {
+            // returns a graph of the following json format 
+            // {"nodes": [ { "course": "course name" }, ...], "edges": [ { "source": "course1", "target": "course2", "group" : n}, ] }
+            // where group assigns a color. If a course is a singular prereq, assign n = 0 (shows as a black edge in D3).
+            let already_created = []
+            let edges = []
+            let source= []
+            function runner(parse_course, edge_list, created, starting) {
+                console.log(parse_course)
+                created.push(parse_course)
+                if (prereqs[parse_course] !== null) {
+                    starting.push(parse_course)
+                    for (course in prereqs[parse_course]) {
+                        let course_text = prereqs[parse_course][course]
+                        if (course_text !== 'or' && course_text !== 'and' && Object.keys(prereqs).includes(course_text)) {
+                            edge_list.push([course_text, parse_course])
+                            if (!(created.includes(course_text))) {
+                                runner(course_text, edge_list, created, source)
+                            }
+
+                        }
+
+                    }
                 }
 
-            fetch("./data/master_prereqs.json")
-                .then(function(resp) {
-                    return resp.json();
-                })
-                .then(function(prereqs){
-                
-            let parent_course = prompt("Enter a class:");
+            }
+            runner("MATH 103A", edges, already_created, source)
+            console.log(edges)
+            graph = {};
+            return graph;
+        }
 
-            graph = gen_graph(parent_course, prereqs);
-                
-			//Width and height
-			let w = 750;
-			let h = 700;
+        fetch("./data/master_prereqs.json")
+            .then(function (resp) {
+                return resp.json();
+            })
+            .then(function (prereqs) {
+                let parent_course = prompt("Enter a class:");
 
-            //Initialize a simple force layout, using the nodes and edges in graph
-			let force = d3.forceSimulation(graph.nodes)
-						  .force("charge", d3.forceManyBody().strength(-200))
-                          .force("link", d3.forceLink(graph.edges).id(function(d) { return d.course; })
-                                // .strength( function (d) {
-                                //     if (d.group == 1) {return 0.5;}
-                                // })
-                                .distance(90))
-                          .force("center", d3.forceCenter().x(w/2).y(h/2));
-                   
-            //use colors for the edges
-            let colors = d3.scaleOrdinal(d3.schemeCategory10);
+                graph = gen_graph(parent_course, prereqs);
+                //Width and height
+                let w = 750;
+                let h = 700;
 
-			//Create SVG element
-			let svg = d3.select("body")
-						.append("svg")
-						.attr("width", w)
-                        .attr("height", h);
-                        
-            //arrows
-            let arrows = svg.append("defs")
-                .selectAll(".arrows")
-                .data(graph.edges)
-                .enter()
-            .append("marker") 
-            .attr("id", function(d,i){
-                return 'arrow' + i; //<-- append index postion
-                })
-            .attr('viewBox', '0 -5 10 10')
-            .attr('refX', 27.6)
-            .attr('refY',0)
-            .attr('markerWidth', 7)
-            .attr('markerHeight', 6)         
-            .attr('orient', 'auto')
-            .append('svg:path')
-                .attr('d', 'M0,-5L10,0L0,5')
-                .style("fill", function(d, i) {
-					if (d.group == 0){
-                     return '#000'}
-                    else {
-                        return colors(d.group)};
-				});    
-            
-            //Create edges as lines
-			let edges = svg.selectAll("line")
-				.data(graph.edges)
-				.enter()
-				.append("line")
-                .style("stroke", function(d, i) {
-					if (d.group == 0){
-                     return '#000'}
-                    else {
-                        return colors(d.group)};
-				})
-                .style("stroke-width", 2)
-                .attr('marker-end', function(d,i){
-                    return "url(#arrow"+i+")";});
-			
-			//Create nodes as svg circles
-            let nodes = svg.selectAll("circle")
-				.data(graph.nodes)
-				.enter()
-				.append("circle")
-                .attr("r", 20)
-                .attr("stroke", function(d,i) {
-                    if (i === 0) { 
-                        return '#dbffdf' }
-                     else {return   '#f2f7f7'}
-                })
-                .style("stroke-width", 5)
-                .style("fill", function(d,i) {
-                    if (i === 0) { 
-                        return '#7CFC00' }
-                     else {return   '#ccc'}
-                });
+                //Initialize a simple force layout, using the nodes and edges in graph
+                let force = d3.forceSimulation(graph.nodes)
+                    .force("charge", d3.forceManyBody().strength(-200))
+                    .force("link", d3.forceLink(graph.edges).id(function (d) { return d.course; })
+                        // .strength( function (d) {
+                        //     if (d.group == 1) {return 0.5;}
+                        // })
+                        .distance(90))
+                    .force("center", d3.forceCenter().x(w / 2).y(h / 2));
 
-            let text = svg.selectAll('text')
+                //use colors for the edges
+                let colors = d3.scaleOrdinal(d3.schemeCategory10);
+
+                //Create SVG element
+                let svg = d3.select("body")
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h);
+
+                //arrows
+                let arrows = svg.append("defs")
+                    .selectAll(".arrows")
+                    .data(graph.edges)
+                    .enter()
+                    .append("marker")
+                    .attr("id", function (d, i) {
+                        return 'arrow' + i; //<-- append index postion
+                    })
+                    .attr('viewBox', '0 -5 10 10')
+                    .attr('refX', 27.6)
+                    .attr('refY', 0)
+                    .attr('markerWidth', 7)
+                    .attr('markerHeight', 6)
+                    .attr('orient', 'auto')
+                    .append('svg:path')
+                    .attr('d', 'M0,-5L10,0L0,5')
+                    .style("fill", function (d, i) {
+                        if (d.group == 0) {
+                            return '#000'
+                        }
+                        else {
+                            return colors(d.group)
+                        };
+                    });
+
+                //Create edges as lines
+                let edges = svg.selectAll("line")
+                    .data(graph.edges)
+                    .enter()
+                    .append("line")
+                    .style("stroke", function (d, i) {
+                        if (d.group == 0) {
+                            return '#000'
+                        }
+                        else {
+                            return colors(d.group)
+                        };
+                    })
+                    .style("stroke-width", 2)
+                    .attr('marker-end', function (d, i) {
+                        return "url(#arrow" + i + ")";
+                    });
+
+                //Create nodes as svg circles
+                let nodes = svg.selectAll("circle")
+                    .data(graph.nodes)
+                    .enter()
+                    .append("circle")
+                    .attr("r", 20)
+                    .attr("stroke", function (d, i) {
+                        if (i === 0) {
+                            return '#dbffdf'
+                        }
+                        else { return '#f2f7f7' }
+                    })
+                    .style("stroke-width", 5)
+                    .style("fill", function (d, i) {
+                        if (i === 0) {
+                            return '#7CFC00'
+                        }
+                        else { return '#ccc' }
+                    });
+
+                let text = svg.selectAll('text')
                     .data(graph.nodes)
                     .enter()
                     .append('text')
                     .style('font', '10px arial')
                     .attr("pointer-events", "none");
-            
-            //drag: a physics thingy
-            let drag_handler = d3.drag()
-                .on("start", drag_start)
-                .on("drag", drag_drag)
-                .on("end", drag_end);	
-                
-            //same as using .call on the node variable as in https://bl.ocks.org/mbostock/4062045 
-            drag_handler(nodes)
 
-            //drag handler
-            //d is the node 
-            function drag_start(d) {
-            if (!d3.event.active) force.alphaTarget(0.3).restart();
-            d.fx = d.x;
-            d.fy = d.y;
-            }
+                //drag: a physics thingy
+                let drag_handler = d3.drag()
+                    .on("start", drag_start)
+                    .on("drag", drag_drag)
+                    .on("end", drag_end);
 
-            function drag_drag(d) {
-            d.fx = d3.event.x;
-            d.fy = d3.event.y;
-            }
+                //same as using .call on the node variable as in https://bl.ocks.org/mbostock/4062045 
+                drag_handler(nodes)
+
+                //drag handler
+                //d is the node 
+                function drag_start(d) {
+                    if (!d3.event.active) force.alphaTarget(0.3).restart();
+                    d.fx = d.x;
+                    d.fy = d.y;
+                }
+
+                function drag_drag(d) {
+                    d.fx = d3.event.x;
+                    d.fy = d3.event.y;
+                }
 
 
-            function drag_end(d) {
-            if (!d3.event.active) force.alphaTarget(0);
-            d.fx = null;
-            d.fy = null;
-            }
-            
-			//Every time the simulation "ticks", this will be called
-			force.on("tick", function() {
+                function drag_end(d) {
+                    if (!d3.event.active) force.alphaTarget(0);
+                    d.fx = null;
+                    d.fy = null;
+                }
 
-				edges.attr("x1", function(d) { return d.source.x; })
-					 .attr("y1", function(d) { return d.source.y; })
-					 .attr("x2", function(d) { return d.target.x; })
-					 .attr("y2", function(d) { return d.target.y; });
-			
-				nodes.attr("cx", function(d) { return d.x; })
-                     .attr("cy", function(d) { return d.y; });
-                     
-                text.attr("x", function(d) { return d.x - 20; })
-                    .attr("dy", function(d) { return d.y +3 ; })
-                    .text( function (d) { return d.course; })
-                
-            });
+                //Every time the simulation "ticks", this will be called
+                force.on("tick", function () {
+
+                    edges.attr("x1", function (d) { return d.source.x; })
+                        .attr("y1", function (d) { return d.source.y; })
+                        .attr("x2", function (d) { return d.target.x; })
+                        .attr("y2", function (d) { return d.target.y; });
+
+                    nodes.attr("cx", function (d) { return d.x; })
+                        .attr("cy", function (d) { return d.y; });
+
+                    text.attr("x", function (d) { return d.x - 20; })
+                        .attr("dy", function (d) { return d.y + 3; })
+                        .text(function (d) { return d.course; })
+
+                });
 
 
             })
-		</script>
-	</body>
+    </script>
+</body>
+
 </html>
