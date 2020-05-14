@@ -59,7 +59,14 @@ fetch("./data/master_prereqs.json")
             let h = 1000;
 
             let parent_course = d3.select("#parent_course").property("value");
-            let graph = gen_graph(parent_course, prereqs);
+            let graph;
+            if (parent_course in prereqs){
+                graph = gen_graph(parent_course, prereqs); 
+            }
+            else {
+                parent_course = "༼ つ ಥ_ಥ ༽つ That class might not exist.";
+                graph = gen_graph(parent_course, prereqs);
+                } 
 
             //Initialize a simple force layout, using the nodes and edges in graph
             let force = d3.forceSimulation(graph.nodes)
@@ -153,7 +160,8 @@ fetch("./data/master_prereqs.json")
                 .enter()
                 .append('text')
                 .style('font', '10px arial')
-                .attr("pointer-events", "none");
+                .attr("pointer-events", "none")
+                .attr("text-anchor", "middle");
 
             //drag: a physics thingy
             let drag_handler = d3.drag()
@@ -195,10 +203,21 @@ fetch("./data/master_prereqs.json")
                 nodes.attr("cx", function (d) { return d.x; })
                     .attr("cy", function (d) { return d.y; });
 
-                text.attr("x", function (d) { return d.x - 20; })
-                    .attr("dy", function (d) { return d.y + 3; })
-                    .text(function (d) { return d.course; })
+                text.attr("x", function(d) { return d.x; })
+                    .attr("dy", function(d) { return d.y+3; })
+                    .text( function (d) { return d.course; });
                 });
 
         } //end of display function
+
+        $( function() {
+            var availableTags = $.map(prereqs,function(v,k) { return k; });
+            $( "#parent_course" ).autocomplete({
+            // source: availableTags
+            source: function(request, response) {
+                        var results = $.ui.autocomplete.filter(availableTags, request.term);
+                        response(results.slice(0, 10));
+                    }
+            });
+        } );
     })

@@ -4,15 +4,21 @@
     <meta charset="utf-8">
     <title>Major Map D3 Graph</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script> -->
+    
     <h2>Prerequisites Map Maker</h2>
 </head>
 
 <body bgcolor = #c5e1e3>
-    <p><label>Enter a course:</label>
-        <input type = "text" value = "" id="parent_course">
+    <div class="ui-widget">
+        <label for="tags">Enter a course </label>
+        <input placeholder = "e.g. MATH 109" onfocus="this.value=''" id="parent_course">
         <button id="display" class="first last">Generate prerequisite map</button>
+    </div>
 
     <script src = "prereq_grapher.js">
     </script>
