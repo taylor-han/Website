@@ -22,8 +22,29 @@ function gen_graph(course, prereqs) {
             }
         }
     }
-    runner(course, edges, already_created, source)
+    function runner_iterative(parse_course) {
+        let queue = [parse_course]
+        already_created.push(parse_course)
+        while (queue.length != 0) {
+            let v = queue.shift()
+            console.log(v);
+            for (course in prereqs[v]) {
+                console.log(course)
+                let course_text = prereqs[v][course]
+                if (!(already_created.includes(course_text))) {
+                    if (course_text !== 'or' && course_text !== 'and' && Object.keys(prereqs).includes(course_text)) {
+                        already_created.push(course_text)
+                        edges.push([course_text, v])
+                        queue.push(course_text)
+                    }
 
+                }
+
+            }
+        }
+    }
+    runner(course, edges, already_created, source)
+    // runner_iterative(course);
     let graph = {"nodes" : [], "edges":[]};
     let c, e;
     for (c in already_created) {
