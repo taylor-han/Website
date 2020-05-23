@@ -58,7 +58,7 @@ fetch("./data/master_prereqs.json")
             let w = 1400;
             let h = 1000;
 
-            let parent_course = d3.select("#parent_course").property("value");
+            let parent_course = d3.select("#parent_course").property("value").toUpperCase();
             let graph;
             if (parent_course in prereqs){
                 graph = gen_graph(parent_course, prereqs); 
