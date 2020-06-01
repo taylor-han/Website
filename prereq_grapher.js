@@ -7,6 +7,7 @@ function gen_graph(course, prereqs) {
     let already_created = []
     let edges = []
     let source= []
+    let group_number = 0
     function runner(parse_course, edge_list, created, starting) {
         created.push(parse_course)
         if (prereqs[parse_course] !== null) {
@@ -14,14 +15,18 @@ function gen_graph(course, prereqs) {
             for (course in prereqs[parse_course]) {
                 let course_text = prereqs[parse_course][course]
                 if (course_text !== 'or' && course_text !== 'and' && Object.keys(prereqs).includes(course_text)) {
-                    edge_list.push([course_text, parse_course])
+                    edge_list.push([course_text, parse_course, group_number])
                     if (!(created.includes(course_text))) {
                         runner(course_text, edge_list, created, source)
                     }
+                } else if (course_text == 'and') {
+                    group_number += 1
                 }
+
             }
         }
     }
+
     function runner_iterative(parse_course) {
         let queue = [parse_course]
         already_created.push(parse_course)
@@ -34,17 +39,17 @@ function gen_graph(course, prereqs) {
                 if (!(already_created.includes(course_text))) {
                     if (course_text !== 'or' && course_text !== 'and' && Object.keys(prereqs).includes(course_text)) {
                         already_created.push(course_text)
-                        edges.push([course_text, v])
+                        edges.push([course_text, v, group_number])
                         queue.push(course_text)
+                    } else if (course_text == 'and') {
+                        group_number += 1
                     }
-
                 }
-
             }
         }
     }
-    runner(course, edges, already_created, source)
-    // runner_iterative(course);
+    // runner(course, edges, already_created, source)
+    runner_iterative(course);
     let graph = {"nodes" : [], "edges":[]};
     let c, e;
     for (c in already_created) {
@@ -57,7 +62,7 @@ function gen_graph(course, prereqs) {
     } 
 
     for (e in edges) {
-        graph.edges.push({"source":edges[e][0], "target":edges[e][1], "group":null})
+        graph.edges.push({"source":edges[e][0], "target":edges[e][1], "group":edges[e][2]})
         } 
     
     console.log(graph);
@@ -100,7 +105,7 @@ fetch("./data/master_prereqs.json")
                 .force("center", d3.forceCenter().x(w / 2).y(h / 2));
 
             //use colors for the edges
-            let colors = d3.scaleOrdinal(d3.schemeCategory10);
+            let colors = d3.scaleOrdinal(d3.schemeCategory10)
 
             //Create SVG element
             let svg = d3.select("body")
