@@ -7,7 +7,7 @@ function gen_graph(course, prereqs) {
     let already_created = []
     let edges = []
     let source= []
-    let group_number = 0
+    let group_number = 1
     function runner(parse_course, edge_list, created, starting) {
         created.push(parse_course)
         if (prereqs[parse_course] !== null) {
@@ -29,26 +29,56 @@ function gen_graph(course, prereqs) {
 
     function runner_iterative(parse_course) {
         let queue = [parse_course]
+
         already_created.push(parse_course)
         while (queue.length != 0) {
             let v = queue.shift()
-            console.log(v);
+            console.log("Node:", v);
+            console.log("Node Prereqs:", prereqs[v])
+            console.log("Flag set to false")
+            let flag = false
             for (course in prereqs[v]) {
-                console.log(course)
+                if (prereqs[v].length === 1) {
+                    flag = true
+                }
                 let course_text = prereqs[v][course]
                 if (!(already_created.includes(course_text))) {
                     if (course_text !== 'or' && course_text !== 'and' && Object.keys(prereqs).includes(course_text)) {
                         already_created.push(course_text)
-                        edges.push([course_text, v, group_number])
+                        console.log("Create Edge:", course_text, "to", v)
+                        if (flag) {
+                            edges.push([course_text, v, 0])
+                            console.log("Flag set to false")
+                            flag = false
+                        } else {
+                            edges.push([course_text, v, group_number])
+                        }
                         queue.push(course_text)
                     } else if (course_text == 'and') {
+                        console.log("Increment Group Number")
                         group_number += 1
+                        if (prereqs[v][course+2] !== undefined && prereqs[v][course+2] !== "or" || prereqs[v][course+1] === undefined) {
+                            console.log("Setting flag to true")
+                            flag = true
+                        }
+                    } else {
+                        console.log("Flag set to false")
+                        flag = false
+                    }
+                } else if (already_created.includes(course_text) && Object.keys(prereqs).includes(course_text)) {
+                    console.log("Linking Existing Node", course_text, "to", v)
+                    if (flag) {
+                        edges.push([course_text, v, 0])
+                        console.log("Flag set to false")
+                        flag = false
+                    } else {
+                        edges.push([course_text, v, group_number])
                     }
                 }
             }
         }
     }
-    // runner(course, edges, already_created, source)
+    //runner(course, edges, already_created, source)
     runner_iterative(course);
     let graph = {"nodes" : [], "edges":[]};
     let c, e;
