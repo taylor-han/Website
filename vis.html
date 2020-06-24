@@ -1,0 +1,359 @@
+<!doctype html>
+<head>
+    <title>MM Cluster Visualization</title>
+    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script> -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- <script>
+         $(document).ready(function(){
+            $("#cl3").click(function(){
+                $("#div3").toggle();
+            });
+        });
+    </script> -->
+</head>
+<style>
+    .body {
+        position: absolute;
+    }
+
+    .answer {
+    display:none;
+    background-color:#e5e5ff;
+    padding:15px;
+}
+
+.question {
+    background-color:#f5f5f5;
+    padding:15px;
+    border-radius:5px;
+    margin:7px;
+}
+    .background {
+    /* position: fixed; */
+    top: 100;
+    left: -200px;
+    z-index: -1;
+    /* padding-left: 200px; */
+    margin-bottom: 200px;
+    object-fit: cover;
+    height: 2750px; 
+    display: block;
+    
+    }
+    .parent {
+    position: absolute;
+    /* top: 0;
+    left: 0; */
+    /* z-index: -1; */
+}
+    #cl3 {
+    position: absolute;
+    top: 1178px;
+    left: 1035px;
+    }
+    #cl4 {
+    position: absolute;
+    top: 2075px;
+    left: 600px;
+    z-index: 1;
+    }
+    #cl5 {
+    position: absolute;
+    top: 1600px;
+    left: 1300px;
+    z-index: 1;
+    }
+    #cl6 {
+    position: absolute;
+    top: 1450px;
+    left: 700px;
+    z-index: 1;
+    }
+    #cl7 {
+    position: absolute;
+    top: 1950px;
+    left: 1000px;
+    }
+    #cl8 {
+    position: absolute;
+    top: 1425px;
+    left: 1800px;
+    }
+    #cl9 {
+    position: absolute;
+    top: 650px;
+    left: 700px;
+    }
+    #cl10 {
+    position: absolute;
+    top: 795px;
+    left: 700px;
+    }
+    #cl11 {
+    position: absolute;
+    top: 2075px;
+    left: 1600px;
+    z-index: 1;
+    }
+    #cl12 {
+    position: absolute;
+    top: 1200px;
+    left: 450px;
+    }
+    #cl13 {
+    position: absolute;
+    top: 1890px;
+    left: 1650px;
+    }
+    #cl14 {
+    position: absolute;
+    top: 546px;
+    left: 1343px;
+    z-index: 1;
+    }
+
+    .textbox {
+    position:absolute;
+    width: 400px;
+    /* height: 300px; */
+    overflow-wrap: break-word;
+    background : rgb(175, 182, 175);
+    z-index : 2;
+    font-family: 'Arial', Helvetica, sans-serif;
+    }
+</style>
+
+<body class = "body" style="background-color:black;" >
+    <!-- <svg id "graph"></svg> -->
+    <p style="color: white";>Add scroll to zoom </p>
+
+    <img class = "background" src="brain_slice.jpg">
+
+    <div id = 'graph'></div>
+
+    <img id ='cl3' src="img/3.png" />
+    <div class = 'textbox' id = 'div3' style = "display: none;"> <b>B3: TP+ (time and amp |P| > |T|) LR- Biphasic</b> <br> 
+        ERP: Biphasic (negative/positive). Press: has a larger negative trough before tap; 
+        Tap: smaller initial negative, not preceding tap, shifted later in time (but this pattern appears often and may be due to tap/press parameters). <br>
+        
+        Downward slope before 0.
+    </div>
+
+    <img id="cl4" src="img/4.png" />
+    <div class = 'textbox' id = 'div4' style = "display: none;"> <b>B4: TP+ (time) LR- (Trough, PR Biphasic) Mirror: B11</b>
+        Mainly a negative peak at ~200 ms (Press right has a earlier positive peak before press. It would be useful to check variance to see if stat significant.)  The shift b/w two bottom peaks (tap and press right) could be due to latency.<br>
+        
+        Right troughs slightly lower than left.
+    </div>
+
+    <img id="cl5" src="img/5.png" />
+    <div class = 'textbox' id = 'div5' style = "display: none;"> <b>B5: TP+ (time) LR+ (amp L>R), Biphasic, Mirror: B6</b>
+        ERP: Biphasic (posive/negative). <br>
+        Press: broader positive peak, smaller negative <br>
+        Tap: sharp positive/negative peaks.  In both, Left is higher.
+       <br>  Overall a lot of similarity b/w Ziyi's 8 and 9, and Shannon's 3 and 11 (and see which B matches those). Would be useful to look at individual IC, and topoplot for all 3 + 2 clusterings (Brian (1), Ziyi (2), Shannon (2)). <br>
+       (Better ERP match with Z8 & S3 ?).  </div>
+
+    <img id="cl6" src="img/6.png" />
+    <div class = 'textbox' id = 'div6' style = "display: none;"><b>B6: TP+ (time) LR+ (only for press; amp, R>L), biphasic, Mirror: B5</b>
+        Maybe Z11 is similar with its dipoles. <br>
+        
+        Press: Has broader peak  <br>
+        Tap: not much L/R difference<br>
+           - Some difference right after 0 but synchronizes again
+        Slight L/R distinction overall<br>
+        
+        L/R mirror of B5? (although peaks higher)</div>
+
+    <img id="cl7" src="img/7.png" />
+    <div class = 'textbox' id = 'div7' style = "display: none;"> <b>**B7: TP+(amp; pre t=0) LR-, biphasic</b><br>
+        Not as much of a TP time difference compared to others.<br>
+        Mostly press vs tap difference.  Tap slightly below.<br>
+        
+        On avg left slightly above right (esp initial peak; mostly for tap).<br>
+        Tap: L/R distinction ~800 ms<br>
+        Maybe symmetric to B5.<br>
+        
+        Press & Tap difference in the amplitude of the positive peak
+        </div>
+    
+    <img id="cl8" src="img/8.png" />
+    <div class = 'textbox' id = 'div8' style = "display: none;"><b>B8: TP+(time) LR+ (amp L>R), Biphasic emphasis on peak</b><br>
+
+        LR diff: left seems to oscillate w/ higher amp<br>
+        ERP could be a L/R mirror of B6.<br>
+        
+        Very similar to B5 (except t=0)?<br>
+        
+        RIght amplitude < left</div>
+
+    <img id="cl9" src="img/9.png" />
+    <div class = 'textbox' id = 'div9' style = "display: none;"><b>B9: TP+ (amp and time(?)) LR+ (For tap, in time pre t=0, then amp), multiphasic/chaotic (peak trough peak for tap)</b><br>
+
+        Tap left before TR around 0.  Also Tap's strong activity before 0 is interesting.<br>
+        
+        Mostly T/P difference, where tap peaks first (while p troughs). (polarity inversion); amp inverted <br>
+        Left slightly above right after t=0<br>
+        Tap left also peaks slightly before tap right before t=0
+        </div>
+
+    <img id="cl10" src="img/10.png" />
+    <div class = 'textbox' id = 'div10' style = "display: none;"><b>B10: TP+ (time) LR+ (amp L>R), biphasic</b><br>
+        Synchronous for most part; tap slightly later.  PL broader start and early response.<br>
+        
+        Downard slope before 0.<br>
+        
+        Left slightly above right.<br>
+        Could shift time scale to line them up; investigate ERP plot separately. (notes on journal)
+        </div>
+
+    <img id="cl11" src="img/11.png" />
+    <div class = 'textbox' id = 'div11' style = "display: none;"><b>B11: TP+ (time and amp), LR-, large trough, high oscillation, Mirror: B4</b><br>
+        P/T difference, especially @ t=0.<br>
+        
+        Left slightly above right especially for tap.<br>
+        Would be useful to use same vertical scale for all plots (to compare w/ B4's ERP).<br>
+        
+        Dipoles mirror B4.
+        </div>
+
+    <img id="cl12" src="img/12.png" />
+    <div class = 'textbox' id = 'div12' style = "display: none;"><b>B12: TP+ (time and amp) LR+ (amp;only for press), big trough</b><br>
+
+        TP difference unless latency shift: press before tap, but also deeper troughs.<br>
+        - Press left has earlier, stronger response<br><br>
+        
+        Press' right is higher (maybe not statistic sig.)<br>
+        dipole plot could indicate contralateral inhibition, possibly beta desync?
+        </div>
+
+    <img id="cl13" src="img/13.png" />
+    <div class = 'textbox' id = 'div13' style = "display: none;"><b>**B13: PT+ (amp and time) LR+ (amp L>>R;mostly for tap), Big Peak</b><br>
+        ☆ Noted as interesting.  ERP seems to prefer Left.<br><br>
+        
+        All of press peaks but only tap left peaks.<br><br>
+        
+        Warning: low IC count
+        </div>
+
+    <img id="cl14" src="img/14.png" />
+    <div class = 'textbox' id = 'div14' style = "display: none;"><b>B14: PT+ (time) LR + (amp |L| >>> |R|), biphasic</b><br>
+        Left preference (troughs first, but before t=0 which is interesting).<br><br>
+        
+        Tap left slightly above at ~100ms<br>
+        Most of press left before peak press occurs.<br><br>
+        
+        Ziyi's not similar
+        
+        </div>
+
+    <script type="text/javascript">
+        
+        // $(document).ready(function(){
+        //     $("#cl3").click(function(){
+        //         $("#div3").css({top: event.pageY, left: event.pageX})
+        //         .toggle();
+        //     });
+        //     $("#cl4").click(function(){
+        //         $("#div4").css({top: event.pageY, left: event.pageX}).toggle();
+        //     });
+
+            
+        // });
+
+        // from https://stackoverflow.com/questions/12433313/jquery-loop-through-elements-by-incrementing-id
+        $(document).ready(function() {
+            for(var i = 3; i < 15; ++i) {
+                $(document).on('click','#cl' + i, (function(index) {
+                    return function() {
+                        $("#div"+index).css({top: event.pageY, left: event.pageX}).toggle();
+                    };
+                })(i));
+            }
+        });
+
+        var dataset = {
+              "nodes": [
+              { "cluster": "4", "x" : 815, "y": 2148},
+              { "cluster": "5", "x":1530, "y": 1670},
+              { "cluster": "6", "x":900, "y": 1519},
+              { "cluster": "11", "x":1830, "y": 2140}
+              ],
+              "edges": [
+              { "source": "4", "target": "11" },
+              { "source": "5", "target": "6" }
+              ]
+              };
+        var w = 3000;
+        var h = 3000;
+
+        // let svg = d3.select("body")
+		// 				.append("svg")
+		// 				.attr("width", w)
+        //                 .attr("height", h);
+
+        // $("svg").css({top: 0, left: 0, position:'absolute' });
+
+        let svg = d3.select("#graph")
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h)
+                    .style('position','absolute')
+                    .style('top',0)
+                    .style('left',0);               
+        
+
+        var force = d3.forceSimulation(dataset.nodes)
+        .force("charge", d3.forceManyBody())
+        .force("link", d3.forceLink(dataset.edges).id(function(d) { return d.cluster; }));
+        // .force("center", d3.forceCenter().x(w/2).y(h/2));
+
+        var edges = svg.selectAll("line")
+            .data(dataset.edges)
+            .enter()
+            .append("line")
+            .style("stroke", "#5eeb34")
+            .style("stroke-opacity", .5)
+            .style("stroke-width", 10)
+            .attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
+
+        var nodes = svg.selectAll("circle")
+            .data(dataset.nodes)
+            .enter()
+            .append("circle")
+            .attr("r", 20)
+            .attr("cx", function(d) {
+                return d.x;
+            })
+            .attr("cy", function(d) {
+                return d.y; })
+            .style("fill", 'green');
+            
+        //   , function(d, i) {
+        //   return colors(i);
+        //   });
+
+                  force.on("tick", function() {
+            //   edges.attr("x1", function(d) { return d.source.x; })
+            //   .attr("y1", function(d) { return d.source.y; })
+            //   .attr("x2", function(d) { return d.target.x; })
+            //   .attr("y2", function(d) { return d.target.y; });
+             
+            //   nodes.attr("cx", function(d) { return d.x; })
+            //   .attr("cy", function(d) { return d.y; });
+
+             
+              });
+
+//               d3.selectAll("circle").on("mouseover", function(){
+//     d3.select(this).raise(); 
+// });
+
+
+  </script>
+</body>
+</html>
