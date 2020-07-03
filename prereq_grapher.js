@@ -57,7 +57,8 @@ function gen_graph(course, prereqs) {
                     } else if (course_text == 'and') {
                         console.log("Increment Group Number")
                         group_number += 1
-                        if (prereqs[v][course+2] !== undefined && prereqs[v][course+2] !== "or" || prereqs[v][course+1] === undefined) {
+                        console.log(prereqs[v][parseInt(course)+2])
+                        if (prereqs[v][parseInt(course)+2] != "or") {
                             console.log("Setting flag to true")
                             flag = true
                         }
