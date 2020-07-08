@@ -100,7 +100,7 @@ function gen_graph(course, prereqs) {
     return graph;
 }
 
-fetch("./data/master_prereqs.json")
+fetch("../data/master_prereqs.json")
     .then(function (resp) {
         return resp.json();
     })
