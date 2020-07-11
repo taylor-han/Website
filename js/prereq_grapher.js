@@ -112,9 +112,10 @@ fetch("../data/master_prereqs.json")
             d3.select("svg").remove();
             
             //Width and height
-            let w = 1400;
-            let h = 1000;
+            let w = 1200;
+            let h = 850;
 
+            //Selecting input and exception
             let parent_course = d3.select("#parent_course").property("value").toUpperCase();
             let graph;
             if (parent_course in prereqs){
@@ -127,7 +128,7 @@ fetch("../data/master_prereqs.json")
 
             //Initialize a simple force layout, using the nodes and edges in graph
             let force = d3.forceSimulation(graph.nodes)
-                .force("charge", d3.forceManyBody().strength(-200))
+                .force("charge", d3.forceManyBody().strength(-150))
                 .force("link", d3.forceLink(graph.edges).id(function (d) { return d.course; })
                     // .strength( function (d) {
                     //     if (d.group == 1) {return 0.5;}
@@ -135,16 +136,16 @@ fetch("../data/master_prereqs.json")
                     .distance(90))
                 .force("center", d3.forceCenter().x(w / 2).y(h / 2));
 
-            //use colors for the edges
+            //Color scale for the edges
             let colors = d3.scaleOrdinal(d3.schemeCategory10)
 
-            //Create SVG element
-            let svg = d3.select("body")
+            //Create SVG element to make graph on
+            let svg = d3.select("#mapper_div")
                 .append("svg")
                 .attr("width", w)
                 .attr("height", h);
 
-            //arrows
+            //Arrow tips
             let arrows = svg.append("defs")
                 .selectAll(".arrows")
                 .data(graph.edges)
@@ -212,6 +213,7 @@ fetch("../data/master_prereqs.json")
                 else {return   '#ccc'}
             });
 
+            //Text on nodes
             let text = svg.selectAll('text')
                 .data(graph.nodes)
                 .enter()
@@ -220,7 +222,7 @@ fetch("../data/master_prereqs.json")
                 .attr("pointer-events", "none")
                 .attr("text-anchor", "middle");
 
-            //drag: a physics thingy
+            //Drag: allows you to drag nodes
             let drag_handler = d3.drag()
                 .on("start", drag_start)
                 .on("drag", drag_drag)
@@ -267,6 +269,7 @@ fetch("../data/master_prereqs.json")
 
         } //end of display function
 
+        //Suggestions bar in input
         $( function() {
             var availableTags = $.map(prereqs,function(v,k) { return k; });
             $( "#parent_course" ).autocomplete({

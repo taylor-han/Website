@@ -9,7 +9,7 @@ html {
 /* Body properties */
 #grad {
     background-image: linear-gradient(to bottom right, #7df0f0, #cff0c9);
-    background-repeat: no-repeat;
+    
   }
 
 body {
@@ -20,12 +20,14 @@ body {
     
     /* this breaks position sticky in Firefox */
     /* overflow-x: hidden; */
-    /* background-repeat: no-repeat; */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     height: 100%;
   }
 
 /* Home page logo */
-#logo { color: #fad20a; font: bold 60px Helvetica, Arial, Sans-Serif;
+#logo { color: #fad20a; 
+    font: bold 60px Roboto, Arial, Sans-Serif;
     text-shadow: 1px 1px #0a9afa, 2px 2px #0a9afa, 3px 3px #0a9afa;
     -webkit-transition: all 0.12s ease-out;
     -moz-transition: all 0.12s ease-out;
@@ -47,24 +49,25 @@ h1 {
 }
 
 h3 {
-    font-family: 'Verdana', Geneva, sans-serif;
-    px;
-    color: white;
+    font-family: 'Arial', Geneva, sans-serif;
+    color: rgb(49, 136, 148);
 }
 
 h2 {
-    font-family: 'Verdana', Geneva, sans-serif;
-    font-size:22px;
-    color: white;
+    font-family: 'Arial', Geneva, sans-serif;
+    font-size: 35px;
+    color:  rgb(49, 136, 148);
+    /* padding-left: 250px; */
+    text-align: center;
 } 
 
 p {
-    font-family: 'Verdana', Geneva, sans-serif;
-    font-size:14px;
-    color: white;
+    font-family: 'Arial', Geneva, sans-serif;
+    font-size:18px;
+    color: rgb(65, 73, 107);
 }
 
-/* Nav bar */
+/* NAV BAR */
 
 /* Add a black background color to the top navigation */
 #navbar {
@@ -72,8 +75,7 @@ p {
     overflow: hidden;
     opacity: .9;
     /* margin:0 auto; */
-    /* position: fixed;
-    z-index: 1; */
+    z-index: 1;
     /* left:0; */
     /* margin-top:20px; */
     text-align: center;
@@ -114,7 +116,39 @@ p {
     padding-top: 60px;
   }
 
+/*                                 */
+/* prerequisite mapper gets loaded on top of this */
+#mapper_div {
+    margin-top: 25px;
+    border-radius: 25px;
+    width: 1200px;
+    height: 850px;
+    border: 4px solid #adadbe;
+    background: rgb(235, 230, 230);
+    /* opacity: 0; */
+}
 
+/* Textbox div for tutorial section */
+.tut_img {
+    background: rgb(29, 29, 29);
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    padding-bottom: 5px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    border-radius: 25px;
+    display: inline-block;
+}
+
+.tut_img img {
+    /* width: 455px; */
+    height: 225px;
+    display: block;
+    margin: 0 auto;
+    max-width:100%;
+    /* height: auto; */
+}
 
 
 /* Style classes */

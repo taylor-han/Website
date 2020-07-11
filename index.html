@@ -35,11 +35,46 @@
         <button id="display" class="first last">Generate prerequisite map</button>
       </div>
 
+      <div id = "mapper_div"></div>
+
       <script src = "./js/prereq_grapher.js"></script>
 
-      <p id = "tutorial">what's poppin</p>
-      <h2>Tutorial</h2>
-   
+      <h2 id = "tutorial">Tutorial</h2>
+
+      <div class = "tut_img" > <!-- style = "float: left"  -->
+        <img src = ./img/tut_hover.png></img>
+        Hover on a course node to display the title
+      </div>
+
+      <div class = "tut_img" >
+        <img src = ./img/tut_click.png></img>
+        Click on a course node to show its description
+      </div>
+
+      <div class = "tut_img" >
+              <img src = ./img/tut_untanglement.png style = "height: 432px"></img>
+              Maps may generate messily: drag nodes around to rearrange however you want
+      </div>
+
+      <div class = "tut_img" >
+        <img src = ./img/tut_colors.png style = "height: 432px"></img>
+        <br>
+        Arrow colors indicate groupings.  <br>
+        -Arrows of the same color mean that either one satistfies <br>
+         the course they are pointing to.  <br>
+         For example COGS 109 or COGS 108 (green arrows) can <br>
+         be taken before COGS 118A.
+         <br><br>
+         - Black arrows indicate that there are no <br>
+         alternatives for that prerequisite.
+      </div>
+
+      
+
+      <div class = "tut_img" >
+        <img src = ./img/tut_other.png style = "height: 432 px"></img>
+        Nodes labelled 'other' may include extra details<br> and prerequisites
+      </div>
     </body>
 
   
