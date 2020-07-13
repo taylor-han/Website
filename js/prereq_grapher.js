@@ -28,20 +28,20 @@ function gen_graph(course, prereqs) {
     }
 
     function runner_iterative(parse_course) {
-        let queue = [parse_course]
-
+        let queue = [parse_course];
+        
         already_created.push(parse_course)
         while (queue.length != 0) {
             let v = queue.shift()
             console.log("Node:", v);
-            console.log("Node Prereqs:", prereqs[v])
+            console.log("Node Prereqs:", prereqs[v]['prerequisites'])
             console.log("Flag set to false")
             let flag = false
-            for (course in prereqs[v]) {
-                if (prereqs[v].length === 1) {
+            for (course in prereqs[v]['prerequisites']) {
+                if (prereqs[v]['prerequisites'].length === 1) {
                     flag = true
                 }
-                let course_text = prereqs[v][course]
+                let course_text = prereqs[v]['prerequisites'][course]
                 if (!(already_created.includes(course_text))) {
                     if (course_text !== 'or' && course_text !== 'and' && Object.keys(prereqs).includes(course_text)) {
                         already_created.push(course_text)
@@ -57,8 +57,8 @@ function gen_graph(course, prereqs) {
                     } else if (course_text == 'and') {
                         console.log("Increment Group Number")
                         group_number += 1
-                        console.log(prereqs[v][parseInt(course)+2])
-                        if (prereqs[v][parseInt(course)+2] != "or") {
+                        console.log(prereqs[v]['prerequisites'][parseInt(course)+2])
+                        if (prereqs[v]['prerequisites'][parseInt(course)+2] != "or") {
                             console.log("Setting flag to true")
                             flag = true
                         }
@@ -85,10 +85,10 @@ function gen_graph(course, prereqs) {
     let c, e;
     for (c in already_created) {
         if (already_created[c] == already_created[0]){
-            graph.nodes.push({"course":already_created[c], "type":"parent"})
+            graph.nodes.push({"course":already_created[c], "type":"parent", "name":prereqs[already_created[c]]["name"], "description":prereqs[already_created[c]]["description"]})
         }
         else {
-        graph.nodes.push({"course":already_created[c], "type":"child"})
+        graph.nodes.push({"course":already_created[c], "type":"child", "name":prereqs[already_created[c]]["name"], "description":prereqs[already_created[c]]["description"]})
         }
     } 
 
@@ -189,6 +189,11 @@ fetch("../data/master_prereqs.json")
                     return "url(#arrow" + i + ")";
                 });
 
+            //Create tooltips to display name on mouseover
+            let div = d3.select("body").append("div")	
+                .attr("class", "tooltip")				
+                .style("opacity", 0); 
+
             //Create nodes as svg circles
             let nodes = svg.selectAll("circle")
             .data(graph.nodes)
@@ -205,13 +210,96 @@ fetch("../data/master_prereqs.json")
             })
             .style("stroke-width", 5)
             .style("fill", function(d,i) {
-                if (d.type == "parent") { 
-                    return '#7CFC00' }
-                else if (d.type == "special") {
-                    return '#1cf7ff'
-                }
-                else {return   '#ccc'}
+                    if (d.type === "parent") { 
+                        return '#7CFC00' }
+                    else if (d.type === "special") {
+                        return '#1cf7ff'
+                    }
+                     else {return   '#ccc'}
+                })
+                .on("mouseover", function(d) {		
+                    div.transition()		
+                        .duration(200)		
+                        .style("opacity", .9);	
+                    div	.html(d.name)	
+                        .style("left", (d3.event.pageX + 5) + "px")		
+                        .style("top", (d3.event.pageY - 25) + "px");	
+                    })					
+                .on("mouseout", function(d) {		
+                    div.transition()		
+                        .duration(500)		
+                        .style("opacity", 0);	
+                });
+
+            //create description boxes upon click
+            
+            let tip; 
+
+            nodes.on("click", function (d){
+                if (tip){ tip.remove()};
+                console.log(d.description);
+                tip = svg.append("g")
+                .attr("class", "tooltip2")				
+                // .attr("id", "tip")
+                tip.attr("transform", "translate(" + (d3.event.pageX + 7)  + "," + (d3.event.pageY  - 300) + ")");
+
+                let rect = tip.append("rect").transition().duration(200)
+                .attr("rx", 6)
+                .attr("ry", 6)
+                .style("fill", "lightsteelblue")
+                .style("stroke", "steelblue")
+                .style("opacity", .9);
+
+                tip.append("text")
+                .text(d.description)
+                .attr("dy", "1em")
+                .attr("x", 5)
+                .call(wrap, 250);
+
+                let bbox = tip.node().getBBox();
+
+                rect.attr("width", bbox.width + 5)
+                    .attr("height", bbox.height)
+
             });
+            
+            //close box upon click on body
+
+            $(document).mouseup(function(e) 
+                {
+                    var container = $("g");
+
+                    // if the target of the click isn't the container nor a descendant of the container
+                    if (!container.is(e.target) && container.has(e.target).length === 0) 
+                    {
+                        container.hide();
+                    }
+                });
+
+            //This is to wrap text in description boxes
+            function wrap(text, width) {
+                text.each(function() {
+                    var text = d3.select(this),
+                    words = text.text().split(/\s+/).reverse(),
+                    word,
+                    line = [],
+                    lineNumber = 0,
+                    lineHeight = 1.1, // ems
+                    y = text.attr("y"),
+                    dy = parseFloat(text.attr("dy")),
+                    tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+                    while (word = words.pop()) {
+                    line.push(word);
+                    tspan.text(line.join(" "));
+                    if (tspan.node().getComputedTextLength() > width) {
+                        line.pop();
+                        tspan.text(line.join(" "));
+                        line = [word];
+                        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", lineHeight + "em").text(word);
+                        }
+                    }
+                });
+            }
 
             //Text on nodes
             let text = svg.selectAll('text')
