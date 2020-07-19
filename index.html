@@ -6,86 +6,105 @@
     <title>Major Map Initiative</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
 
     <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
       <script type="text/javascript">
         var jQuery_1_7_1 = $.noConflict(true);
       </script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-      
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" ></script>
+          
     
     
   </head>
 
     <body id = "grad">
-      <h1 id = "logo"> 
-        <img src = "./img/triton_logo.png" height="55"> </img>
-          Major Map Initiative 
-          <img src= "./img/triton_logo.png" height="55"> </img>
-      </h1>
+      <div class = "container" id = "front_page">
+        <div class = "row" >
+          <div class = "col" >
+            <h1 id = "logo"> 
+              <img src = "./img/triton_logo.png" height="55"> </img>
+                Major Map Initiative 
+                <img src= "./img/triton_logo.png" height="55"> </img>
+            </h1>
 
-      <div id = "navbar">
-        <a class="active" href="#mapper">Prerequisite Mapper</a>
-        <a href="#tutorial">Tutorial</a>
-        <a href="./about.html">About Us</a>
-        <a href="./contact.html">Contact Us</a>
-      </div>
-      
-      <p>The prerequisite mapper lists all the prerequisites for a given class in an intuitive, interactive diagram.</p>
-      <p>Check out the tutorial below the prerequisite mapper to understand how to use it.</p>
-      
-      <div class="ui-widget">
-        <label for="tags">Enter a course </label>
-        <input placeholder = "e.g. MATH 109" onfocus="this.value=''" id="parent_course">
-        <button id="display" class="first last">Generate prerequisite map</button>
-      </div>
+            <!-- <div id = "navbar">
+              <a class="active" href="#mapper">Prerequisite Mapper</a>
+              <a href="#tutorial">Tutorial</a>
+              <a href="./about.html">About Us</a>
+              <a href="./contact.html">Contact Us</a>
+            </div> -->
+            <div id="navbar"></div>
+            
+            <p>The prerequisite mapper lists all the prerequisites for a given class in an intuitive, interactive diagram.</p>
+            <p>Check out the tutorial below the prerequisite mapper to understand how to use it.</p>
+            
+            <div class = "container">
+              <label for="tags">Enter a course </label>
+              <input placeholder = "e.g. MATH 109" onfocus="this.value=''" id="parent_course">
+              <!-- <button id="display" class="first last">Generate prerequisite map</button> -->
+              <button id = "display" type="submit" class="btn btn-primary">Generate prerequisite map</button>
+            </div>
 
-      <div id = "mapper_div"></div>
+            <div id = "mapper_div"></div>
 
-      <script src = "./js/prereq_grapher.js"></script>
+            <script src = "./js/prereq_grapher.js"></script>
 
-      <h2 id = "tutorial">Tutorial</h2>
+            <h2 id = "tutorial">Tutorial</h2>
 
-      <div class = "tut_img" > <!-- style = "float: left"  -->
-        <img src = ./img/tut_hover.png></img>
-        Hover on a course node to display the title
-      </div>
+            <div class = "tut_img" > <!-- style = "float: left"  -->
+              <img src = ./img/tut_hover.png></img>
+              Hover on a course node to display the title
+            </div>
 
-      <div class = "tut_img" >
-        <img src = ./img/tut_click.png></img>
-        Click on a course node to show its description
-      </div>
+            <div class = "tut_img" >
+              <img src = ./img/tut_click.png></img>
+              Click on a course node to show its description
+            </div>
 
-      <div class = "tut_img" >
-              <img src = ./img/tut_untanglement.png style = "height: 432px"></img>
-              Maps may generate messily: drag nodes around to rearrange however you want
-      </div>
+            <div class = "tut_img" >
+                    <img src = ./img/tut_untanglement.png style = "height: 432px"></img>
+                    Maps may generate messily: drag nodes around to rearrange however you want
+            </div>
 
-      <div class = "tut_img" >
-        <img src = ./img/tut_colors.png style = "height: 432px"></img>
-        <br>
-        Arrow colors indicate groupings.  <br>
-        -Arrows of the same color mean that either one satistfies <br>
-         the course they are pointing to.  <br>
-         For example COGS 109 or COGS 108 (green arrows) can <br>
-         be taken before COGS 118A.
-         <br><br>
-         - Black arrows indicate that there are no <br>
-         alternatives for that prerequisite.
-      </div>
+            <div class = "tut_img" >
+              <img src = ./img/tut_colors.png style = "height: 432px"></img>
+              <br>
+              Arrow colors indicate groupings.  <br>
+              -Arrows of the same color mean that either one satistfies <br>
+              the course they are pointing to.  <br>
+              For example COGS 109 or COGS 108 (green arrows) can <br>
+              be taken before COGS 118A.
+              <br><br>
+              - Black arrows indicate that there are no <br>
+              alternatives for that prerequisite.
+            </div>
 
-      
+            
 
-      <div class = "tut_img" >
-        <img src = ./img/tut_other.png style = "height: 432 px"></img>
-        Nodes labelled 'other' may include extra details<br> and prerequisites
+            <div class = "tut_img" >
+              <img src = ./img/tut_other.png style = "height: 432 px"></img>
+              Nodes labelled 'other' may include extra details<br> and prerequisites
+            </div>
+
+          </div>
+        </div>
       </div>
     </body>
 
   
-      <script src = "./js/nav.js"></script>
+      <!-- <script src = "./js/nav.js"></script> -->
+      <script src="./js/loadNav.js"></script>
 
    
     

@@ -33,9 +33,7 @@ function gen_graph(course, prereqs) {
         already_created.push(parse_course)
         while (queue.length != 0) {
             let v = queue.shift()
-            console.log("Node:", v);
-            console.log("Node Prereqs:", prereqs[v]['prerequisites'])
-            console.log("Flag set to false")
+            
             let flag = false
             for (course in prereqs[v]['prerequisites']) {
                 if (prereqs[v]['prerequisites'].length === 1) {
@@ -45,32 +43,32 @@ function gen_graph(course, prereqs) {
                 if (!(already_created.includes(course_text))) {
                     if (course_text !== 'or' && course_text !== 'and' && Object.keys(prereqs).includes(course_text)) {
                         already_created.push(course_text)
-                        console.log("Create Edge:", course_text, "to", v)
+
                         if (flag) {
                             edges.push([course_text, v, 0])
-                            console.log("Flag set to false")
+
                             flag = false
                         } else {
                             edges.push([course_text, v, group_number])
                         }
                         queue.push(course_text)
                     } else if (course_text == 'and') {
-                        console.log("Increment Group Number")
+
                         group_number += 1
-                        console.log(prereqs[v]['prerequisites'][parseInt(course)+2])
+
                         if (prereqs[v]['prerequisites'][parseInt(course)+2] != "or") {
-                            console.log("Setting flag to true")
+
                             flag = true
                         }
                     } else {
-                        console.log("Flag set to false")
+
                         flag = false
                     }
                 } else if (already_created.includes(course_text) && Object.keys(prereqs).includes(course_text)) {
-                    console.log("Linking Existing Node", course_text, "to", v)
+
                     if (flag) {
                         edges.push([course_text, v, 0])
-                        console.log("Flag set to false")
+
                         flag = false
                     } else {
                         edges.push([course_text, v, group_number])
@@ -96,7 +94,7 @@ function gen_graph(course, prereqs) {
         graph.edges.push({"source":edges[e][0], "target":edges[e][1], "group":edges[e][2]})
         } 
     
-    console.log(graph);
+
     return graph;
 }
 
@@ -237,7 +235,7 @@ fetch("../data/master_prereqs.json")
 
             nodes.on("click", function (d){
                 if (tip){ tip.remove()};
-                console.log(d.description);
+
                 tip = svg.append("g")
                 .attr("class", "tooltip2")				
                 // .attr("id", "tip")
@@ -365,6 +363,9 @@ fetch("../data/master_prereqs.json")
             source: function(request, response) {
                         var results = $.ui.autocomplete.filter(availableTags, request.term);
                         response(results.slice(0, 10));
+                        console.log(response);
+                        console.log(results);
+
                     }
             });
         } );

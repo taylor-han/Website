@@ -7,6 +7,11 @@ html {
   }
 
 /* Body properties */
+/* Bootstrap  */
+#front_page {
+  margin-left: 20px;
+}
+
 #grad {
     background-image: linear-gradient(to bottom right, #7df0f0, #cff0c9);
     
