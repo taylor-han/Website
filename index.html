@@ -5,17 +5,9 @@
     <meta charset="utf-8">
     <title>Major Map Initiative</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    
 
     <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
-    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-      <script type="text/javascript">
-        var jQuery_1_7_1 = $.noConflict(true);
-      </script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-
+    
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -24,8 +16,6 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" ></script>
           
-    
-    
   </head>
 
     <body id = "grad">
@@ -51,6 +41,10 @@
             
             <div class = "container">
               <label for="tags">Enter a course </label>
+              
+              <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+              <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+              
               <input placeholder = "e.g. MATH 109" onfocus="this.value=''" id="parent_course">
               <!-- <button id="display" class="first last">Generate prerequisite map</button> -->
               <button id = "display" type="submit" class="btn btn-primary">Generate prerequisite map</button>
@@ -61,7 +55,7 @@
             <script src = "./js/prereq_grapher.js"></script>
 
             <h2 id = "tutorial">Tutorial</h2>
-
+            <p><i>Note: Examples used in the tutorial may be inaccurate for the sake of simplifaction and/or due to updated course catalogs.</i></p>
             <div class = "tut_img" > <!-- style = "float: left"  -->
               <img src = ./img/tut_hover.png></img>
               Hover on a course node to display the title
@@ -69,7 +63,9 @@
 
             <div class = "tut_img" >
               <img src = ./img/tut_click.png></img>
-              Click on a course node to show its description
+              Click on a course node to show its description.<br>
+              Pay attention to additional details in between <br>
+              asterisks.
             </div>
 
             <div class = "tut_img" >
@@ -90,12 +86,6 @@
               alternatives for that prerequisite.
             </div>
 
-            
-
-            <div class = "tut_img" >
-              <img src = ./img/tut_other.png style = "height: 432 px"></img>
-              Nodes labelled 'other' may include extra details<br> and prerequisites
-            </div>
 
           </div>
         </div>

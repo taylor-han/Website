@@ -5,7 +5,13 @@
     <meta charset="utf-8">
     <title>Major Map Initiative</title>
     <link rel="stylesheet" href="styles.css">
-    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" ></script>
   </head>
 
     <body id = "grad">
@@ -15,12 +21,7 @@
             <img src= "./img/triton_logo.png" height="55"> </img>
         </h1>
 
-        <div id = "navbar">
-          <a href="./index.html">Prerequisite Mapper</a>
-          <a href="./index.html#tutorial">Tutorial</a>
-          <a href="./about.html">About Us</a>
-          <a class="active" href="./contact.html">Contact Us</a>
-        </div>
+        <div id="navbar"></div>
     
         <p>
         To report a bug, please send us an email: <a href = "mailto: majormap@ucsd.edu" target="_blank">majormap@ucsd.edu</a>.
@@ -28,5 +29,5 @@
         <p>If you are interested in joining, check the about page and send us an email.</p>
    
     </body>
-    <script src = "./js/nav.js"></script>
+    <script src="./js/loadNav.js"></script>
 </html>

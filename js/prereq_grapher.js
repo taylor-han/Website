@@ -363,9 +363,6 @@ fetch("../data/master_prereqs.json")
             source: function(request, response) {
                         var results = $.ui.autocomplete.filter(availableTags, request.term);
                         response(results.slice(0, 10));
-                        console.log(response);
-                        console.log(results);
-
                     }
             });
         } );
