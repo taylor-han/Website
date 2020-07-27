@@ -2,9 +2,20 @@
 
 <html>
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173614963-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-173614963-1');
+    </script>
+
     <meta charset="utf-8">
     <title>Major Map Initiative</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="img/map.ico">
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -21,39 +32,76 @@
             <h1 id = "logo"> 
               <img src = "./img/triton_logo.png" height="55"> </img>
                 Major Map Initiative 
-                <img src= "./img/triton_logo.png" height="55"> </img>
             </h1>
 
             <div id="navbar"></div>
         
-            <p>We are looking for members to help us with this endeavor!</p>
+            <p>This website is unfinished.  We are looking for members to help us with this endeavor!</p>
             
             <h2>A Brief Mission Statement</h2>
             <h3>Why are we doing this?</h3>
-            <p>
-            -  Selecting a major is a much more complex task than it seems to be, and being able to see how everything ties in at once is valuable.  
-            This would be especially useful for incoming students trying to decide on a major, or undeclared majors.
+            <p>   &emsp; Deciding on a major and selecting what classes to take is a complex task, especially as an incoming college student.  
+              Students in a major sometimes get tunnel vision and take college one quarter at a time, not realizing why they have 
+              to take specific classes and how it ties into the big picture.  Prerequisites in certain majors can be very dependent 
+              on one another, so being able to plan ahead by understanding how courses are related – through a visual “map” – is a 
+              valuable asset. <br>
+              &emsp; While existing campus resources are helpful, we wanted to offer a more intuitive set of tools to encourage a more 
+              proactive and comprehensive planning of one’s college career.  As a student org we also believe students should be 
+              more actively involved in understanding the structure of their majors.
             </p>
-            <p>
-            -  Students in a major often have “tunnel vision” and take college one quarter at a time, not realizing why they have to take specific 
-            classes and how it ties into the big picture. Knowing the “map” ahead of time can help them make the right decisions.
-            </p>
-            <p>Thus we want to improve upon what the school has to offer regarding such resources.</p>
 
             <h3>What does our app want to accomplish?</h3>
-            <p>- Display a variety of “maps”: One for major, one for GE’s, Lower and Upper div… there can be many different combinations</p>
-            <p class='tab'>- Selecting one major (including specialization) should show a huge road map with many different paths.</p>
-            <p class='tab'>- End nodes will typically be higher division classes.</p>
-            <p class="tab">- Maps will come with an accompanying resources section (youtube videos etc).</p>
-            <p>- Display individual course series maps:</p>
-            <p class="tab">- Because upper division courses are often complex subjects, this road map should help student understand <b>WHY</b> they need to take certain prerequisites.</p>
-            <p class="tab">- Should have a feature where hovering over a class in the map explains why this topic is relevant for the end node class.</p>
+            
+            <p>   &emsp; We want this website to be an accessible tool students can use not just to plan classes for the next quarter, 
+            but for their whole college career.  With the contribution of students and org members, we want to shed light 
+            on the structure of majors, explaining why certain prerequisites are necessary. This can also be a hub to make 
+            one’s first look at majors and individual classes more in depth than just scanning the course catalog – by adding 
+            studying tips and resources to each class, so you know what to expect.<br>  
+            &emsp; The main set of tools we are developing are applets to display a variety of road maps: one for majors, one for GEs, etc.  
+            Thus far we have created the core framework, which is an applet displaying all dependent prerequisites for a given course. <br>
+            &emsp; In the long term we’d like this to be an official tool used by the university – and possibly other universities.  By 
+            collaborating with faculty, we hope to bridge the gap between the student body and administration. 
+            </p>
+            
+            <h2>How do I join?</h2>
+            <p>&emsp; We are looking for new principal members as well as members. We believe this is a great opportunity to 
+              develop your leadership and/or coding skills, by working on a collaborative and creative project that can 
+              help other students.</p>
+
+            <form action = "https://forms.gle/Xi7Wv9qfj5tyuUbL9">
+              <button id = "display" type="submit" class="btn btn-primary">Click here to apply!</button>
+            </form>
             
             <h2>Current state of affairs (as of July 2020)</h2>
             <p>
-            So far we have created an applet on this website that generates a prerequisite map for a given course in the form of a <a href ='https://en.wikipedia.org/wiki/Directed_acyclic_graph' target="_blank">directed acyclic graph</a>.</p>
+              &emsp; So far we have created an applet on this website that generates a prerequisite map for a given course in the form of a <a href ='https://en.wikipedia.org/wiki/Directed_acyclic_graph' target="_blank">directed acyclic graph</a>.</p>
             </p>
-            <p>- We need help designing the website, and adding a ton of other functionality and resources!!</p>
+
+            <h2>Founding Members</h2>
+
+            <div class="card text-white bg-dark mb-3" style="max-width: 35rem; float: left; margin-right: 20px;">
+              <img class="card-img-top" src="./img/brian.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Brian Barry</h5>
+                <p class="card-text"><i>Cognitive Science '20</i></p>
+              </div>
+            </div>
+
+            <div class="card text-white bg-dark mb-3" style="max-width: 15rem; float: left; margin-right: 20px;">
+              <img class="card-img-top" src="./img/mike.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Michael Marsella</h5>
+                <p class="card-text"><i>Math & Computer Science '20</i></p>
+              </div>
+            </div>
+
+            <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+              <img class="card-img-top" src="./img/triton_logo.png" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Clark Phan</h5>
+                <p class="card-text"> <i>Math & Computer Science '20</i></p>
+              </div>
+            </div>
 
           </div>
         </div>

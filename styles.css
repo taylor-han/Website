@@ -12,6 +12,10 @@ html {
   margin-left: 20px;
 }
 
+.card-text {
+ color: white !important
+}
+
 #grad {
     background-image: linear-gradient(to bottom right, #7df0f0, #cff0c9);
     

@@ -2,9 +2,20 @@
 
 <html>
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173614963-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-173614963-1');
+    </script>
+
     <meta charset="utf-8">
     <title>Major Map Initiative</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="img/map.ico">
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -15,19 +26,23 @@
   </head>
 
     <body id = "grad">
-        <h1 id = "logo"> 
-          <img src = "./img/triton_logo.png" height="55"> </img>
-            Major Map Initiative 
-            <img src= "./img/triton_logo.png" height="55"> </img>
-        </h1>
+      <div class = "container" id = "front_page">
+        <div class = "row" >
+          <div class = "col" >
+            <h1 id = "logo"> 
+              <img src = "./img/triton_logo.png" height="55"> </img>
+                Major Map Initiative 
+            </h1>
 
-        <div id="navbar"></div>
-    
-        <p>
-        To report a bug, please send us an email: <a href = "mailto: majormap@ucsd.edu" target="_blank">majormap@ucsd.edu</a>.
-        </p>
-        <p>If you are interested in joining, check the about page and send us an email.</p>
-   
+            <div id="navbar"></div>
+        
+            <p>
+            To report a bug, or send a suggestion, please send us an email: <a href = "mailto: majormap@ucsd.edu" target="_blank">majormap@ucsd.edu</a>.
+            </p>
+            <p>If you are interested in joining, check the about page and send us an email.</p>
+          </div>
+        </div>
+      </div>
     </body>
     <script src="./js/loadNav.js"></script>
 </html>

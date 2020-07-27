@@ -239,7 +239,7 @@ fetch("../data/master_prereqs.json")
                 tip = svg.append("g")
                 .attr("class", "tooltip2")				
                 // .attr("id", "tip")
-                tip.attr("transform", "translate(" + (d3.event.pageX + 7)  + "," + (d3.event.pageY  - 300) + ")");
+                tip.attr("transform", "translate(" + (d3.event.pageX + -18)  + "," + (d3.event.pageY  - 212) + ")");
 
                 let rect = tip.append("rect").transition().duration(200)
                 .attr("rx", 6)

@@ -2,10 +2,20 @@
 
 <html>
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173614963-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-173614963-1');
+    </script>
+    <link rel="shortcut icon" href="img/map.ico">
     <meta charset="utf-8">
     <title>Major Map Initiative</title>
     <link rel="stylesheet" href="styles.css">
-
+    
     <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
     
     <!-- CSS only -->
@@ -25,22 +35,16 @@
             <h1 id = "logo"> 
               <img src = "./img/triton_logo.png" height="55"> </img>
                 Major Map Initiative 
-                <img src= "./img/triton_logo.png" height="55"> </img>
+
             </h1>
 
-            <!-- <div id = "navbar">
-              <a class="active" href="#mapper">Prerequisite Mapper</a>
-              <a href="#tutorial">Tutorial</a>
-              <a href="./about.html">About Us</a>
-              <a href="./contact.html">Contact Us</a>
-            </div> -->
             <div id="navbar"></div>
             
             <p>The prerequisite mapper lists all the prerequisites for a given class in an intuitive, interactive diagram.</p>
             <p>Check out the tutorial below the prerequisite mapper to understand how to use it.</p>
             
             <div class = "container">
-              <label for="tags">Enter a course </label>
+              <label for="tags">Enter a course: </label>
               
               <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
               <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -55,37 +59,44 @@
             <script src = "./js/prereq_grapher.js"></script>
 
             <h2 id = "tutorial">Tutorial</h2>
-            <p><i>Note: Examples used in the tutorial may be inaccurate for the sake of simplifaction and/or due to updated course catalogs.</i></p>
-            <div class = "tut_img" > <!-- style = "float: left"  -->
-              <img src = ./img/tut_hover.png></img>
-              Hover on a course node to display the title
-            </div>
+            <p><i>Note: Examples used in the tutorial may be inaccurate for the sake of simplification and/or due to updated course catalogs.</i></p>
+            
+            <div style = "padding-left: 260px;">
 
-            <div class = "tut_img" >
-              <img src = ./img/tut_click.png></img>
-              Click on a course node to show its description.<br>
-              Pay attention to additional details in between <br>
-              asterisks.
-            </div>
+              <div class="card text-white bg-dark mb-3" style="max-width: 35rem;">
+                <img class="card-img-top" src="./img/tut_hover.png" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Hover on a course node to display the title.</h5>
+                </div>
+              </div>
 
-            <div class = "tut_img" >
-                    <img src = ./img/tut_untanglement.png style = "height: 432px"></img>
-                    Maps may generate messily: drag nodes around to rearrange however you want
-            </div>
+              <div class="card text-white bg-dark mb-3" style="max-width: 35rem;">
+                <img class="card-img-top" src="./img/tut_click.png" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Click on a course node to show its description.</h5>
+                  <p class="card-text" >There may be additional details in between asterisks at the end of the description. </p>
+                </div>
+              </div>
 
-            <div class = "tut_img" >
-              <img src = ./img/tut_colors.png style = "height: 432px"></img>
-              <br>
-              Arrow colors indicate groupings.  <br>
-              -Arrows of the same color mean that either one satistfies <br>
-              the course they are pointing to.  <br>
-              For example COGS 109 or COGS 108 (green arrows) can <br>
-              be taken before COGS 118A.
-              <br><br>
-              - Black arrows indicate that there are no <br>
-              alternatives for that prerequisite.
-            </div>
+              <div class="card text-white bg-dark mb-3" style="max-width: 35rem;">
+                <img class="card-img-top" src="./img/tut_untanglement.png" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Maps may generate messily.</h5>
+                  <p class="card-text" >Drag nodes around to rearrange however you like. </p>
+                </div>
+              </div>
 
+              <div class="card text-white bg-dark mb-3" style="max-width: 35rem;">
+                <img class="card-img-top" src="./img/tut_colors.png" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Arrow colors indicate groupings. </h5>
+                  <p class="card-text" >-Arrows of the same color mean that either one satisfies the course they are pointing to. <br>
+                    - Black arrows indicate that there are no alternatives for that prerequisite. <br>
+                    - In this example, either COGS 109 or COGS 108 (green arrows) can be taken before COGS 118A. Both Math 20E and Math are required.<br>
+                </div>
+              </div>
+
+            </div>
 
           </div>
         </div>
