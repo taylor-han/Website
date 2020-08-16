@@ -2,7 +2,7 @@
 
 function gen_graph(course, prereqs) {
     // returns a graph of the following json format 
-    // {"nodes": [ { "course": "course name", "type":"type" }, ...], "edges": [ { "source": "course1", "target": "course2", "group" : n}, ] }
+    // {"nodes": [ { "course": "shorthand name e.g. CSE 100", "name":"full name e.g. Mathematical Reasoning", "description":"full description" }], "edges": [ { "source": "course1", "target": "course2", "group" : n}, ] }
     // where group assigns a color. If a course is a singular prereq, assign n = 0 (shows as a black edge in D3).
     let already_created = []
     let edges = []
