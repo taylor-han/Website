@@ -8,6 +8,8 @@ function gen_graph(course, prereqs) {
     let edges = []
     let source= []
     let group_number = 1
+
+    //returns an MST; currently unused
     function runner(parse_course, edge_list, created, starting) {
         created.push(parse_course)
         if (prereqs[parse_course] !== null) {
@@ -27,6 +29,7 @@ function gen_graph(course, prereqs) {
         }
     }
 
+    //returns graph traversal
     function runner_iterative(parse_course) {
         let queue = [parse_course];
         
@@ -77,7 +80,8 @@ function gen_graph(course, prereqs) {
             }
         }
     }
-    //runner(course, edges, already_created, source)
+
+    //execute runner_iterative to create the prerequisite JSON for particular course
     runner_iterative(course);
     let graph = {"nodes" : [], "edges":[]};
     let c, e;
