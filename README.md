@@ -3,8 +3,6 @@
 Major Map Initiative - Development branch is the rolling release of the Major Map Initiative website. This rolling release is for internal members developing and testing new features and improvements.
 
 This version is intended for developers and designers and is absolutely, 100% NOT recommended for daily use. Rolling releases are not subject to the rigorous testing of the regular production release.
-shed to the UC San Diego mobile app for its 30,000 users to experience, and you will be added as a collaborator on [mobile.ucsd.edu](https://mobile.ucsd.edu/).
-
 
 ## How to Contribute
 
