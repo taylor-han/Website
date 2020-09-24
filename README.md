@@ -19,7 +19,7 @@ You'll want to make sure you keep your fork up to date by tracking the original 
 
 ```shell
 # Add 'upstream' repo to list of remotes
-git remote add upstream <link>
+git remote add upstream "https://github.com/Major-Map-Initiative/Website.git"
 ```
 
 Whenever you want to update your fork with the latest upstream changes, you'll need to first fetch the upstream repo's branches and latest commits to bring them into your repository:
